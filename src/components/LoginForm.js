@@ -1,15 +1,16 @@
+// src/components/LoginForm.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ setUser }) => {
-  const [name, setName] = useState('');
   const [userId, setUserId] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (name && userId) {
-      const user = { name, userId };
+    if (userId) {
+      const user = { userId };
       localStorage.setItem('currentUser', JSON.stringify(user));
       setUser(user);
       navigate('/');
@@ -17,18 +18,8 @@ const LoginForm = ({ setUser }) => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-      </div>
+    <form onSubmit={handleLogin} className="login-form">
+      <h2>Food Delivery Service</h2>
       <div>
         <label>
           User ID:
@@ -37,6 +28,7 @@ const LoginForm = ({ setUser }) => {
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
             required
+            maxLength={6}
           />
         </label>
       </div>
