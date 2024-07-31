@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const FoodForm = ({ addOrder }) => {
   const [formData, setFormData] = useState({
-    name: '',
     cabin: '',
     items: [{ foodItem: '', quantity: 1 }]
   });
@@ -51,11 +50,12 @@ const FoodForm = ({ addOrder }) => {
     const totalOrder = { ...formData, items: ordersWithPrices };
     addOrder(totalOrder);
     navigate('/history');
+    alert('order is placed')
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      
+
       <div>
         <label>
           Cabin:
@@ -65,6 +65,7 @@ const FoodForm = ({ addOrder }) => {
             value={formData.cabin}
             onChange={(e) => setFormData({ ...formData, cabin: e.target.value })}
             required
+            maxLength={4}
           />
         </label>
       </div>
@@ -97,11 +98,11 @@ const FoodForm = ({ addOrder }) => {
               required
             />
           </label>
-          <button type="button" onClick={() => handleRemoveItem(index)}>Remove</button>
+          {/* <button type="button-in" onClick={() => handleRemoveItem(index)}>Remove</button> */}
         </div>
       ))}
-      <button type="button" onClick={handleAddItem}>Add Another Item</button>
-      <button type="submit">Place Order</button>
+      <button type="button-in" onClick={handleAddItem}>Add Another Item</button>
+      <button type="submit" >Place Order</button>
     </form>
   );
 };
